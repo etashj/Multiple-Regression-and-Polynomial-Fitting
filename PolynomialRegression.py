@@ -26,7 +26,6 @@ np.ndarray, shape(m_features)
 '''
 
 def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDArray[np.float64]: 
-    
     xmat = np.ones((1, X.shape[0]))
     for i in range(1, degree+1): 
         xmat = np.vstack((xmat, X**i))
@@ -49,4 +48,20 @@ def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDAr
     # Return out equation coefficients
     return B
     
+def regress_qr(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDArray[np.float64]: 
+    xmat = np.ones((1, X.shape[0]))
+    for i in range(1, degree+1): 
+        xmat = np.vstack((xmat, X**i))
+    xmat = np.asmatrix(np.transpose(xmat))
 
+    Q, R = np.linalg.qr(xmat, mode="reduced")
+    
+    ymat = np.transpose(np.asmatrix(Y))
+
+    try:
+        B = np.linalg.solve(R, np.transpose(Q) * ymat)
+    except np.linalg.LinAlgError: 
+        B, _, _, _ = np.linalg.lstsq(R, np.transpose(Q) * ymat)
+
+    # Return out equation coefficients
+    return B

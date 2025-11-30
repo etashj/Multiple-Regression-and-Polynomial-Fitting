@@ -5,7 +5,7 @@ import numpy as np
 x = np.array( [-3, -2, -1, 0, 1, 2, 3, ] )
 y = np.array( [-14, -1, 4, 5, 2, 1, -2 ] )
 
-ans = PR.regress(x, y, 4)
+ans = PR.regress_qr(x, y, 4)
 print(ans)
 
 n = np.array([
