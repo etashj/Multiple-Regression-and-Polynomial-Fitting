@@ -22,8 +22,8 @@ Result
 ------
 np.ndarray, shape(m_features)
     Array of regression coefficient outputs
-    Eg. [ β_1, β_2, ..., β_m ]
-    ==> β_1*x_1 + β_2*x_2 + ... + β_m*x_m
+    Eg. [ β_0, β_1, ..., β_m ]
+    ==> β_0 + β_1*x_1 + β_2*x_2 + ... + β_m*x_m
     ==> [β]X.T (in matrix form)
 '''
 
