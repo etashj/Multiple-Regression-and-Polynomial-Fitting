@@ -46,7 +46,7 @@ def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDAr
         B, _, _, _ = np.linalg.lstsq(ata, atb)
 
     # Return out equation coefficients
-    return B
+    return np.asarray(B)
     
 def regress_qr(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDArray[np.float64]: 
     xmat = np.ones((1, X.shape[0]))
@@ -64,4 +64,4 @@ def regress_qr(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> N
         B, _, _, _ = np.linalg.lstsq(R, np.transpose(Q) * ymat)
 
     # Return out equation coefficients
-    return B
+    return np.asarray(B)

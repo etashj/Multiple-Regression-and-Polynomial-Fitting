@@ -49,5 +49,5 @@ def regress(X: NDArray[np.float64], Y: NDArray[np.float64]) -> NDArray[np.float6
         B, _, _, _ = np.linalg.lstsq(ata, atb)
 
     # Return out equation coefficients
-    return B
+    return np.asarray(B)
 
