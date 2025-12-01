@@ -118,10 +118,10 @@ B: np.ndarray, shape(m_features)
 Result
 ------
 A string representation of the polynomial
-"β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg"
+"y = β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg"
 '''
 def polynomToString(B: NDArray[np.float64]) -> str: 
-    result = str(B[0])
+    result = "y = " + str(B[0])
     for i in range(1, B.shape[0]): 
         result += f" + {B[i]}(x^{i})"
     return result
@@ -138,10 +138,10 @@ B: np.ndarray, shape(m_features)
 Result
 ------
 A string representation of the polynomial
-"β_0 + β_1*x_1 + β_2*x_2 + ... + β_m*x_n"
+"y = β_0 + β_1*x_1 + β_2*x_2 + ... + β_m*x_n"
 '''
 def linearToString(B: NDArray[np.float64]) -> str: 
-    result = str(B[0])
+    result = "y = " + str(B[0])
     for i in range(1, B.shape[0]): 
         result += f" + {B[i]}(x_{i})"
     return result
