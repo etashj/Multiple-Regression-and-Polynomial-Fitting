@@ -8,6 +8,7 @@ y = np.array( [-14, -1, 4, 5, 2, 1, -2 ] )
 
 ans = PR.regress_qr(x, y, 4)
 print(ans)
+Grapher.plotPolynomialRegression(x,y,ans)
 
 n = np.array([
     [1, 2, 3], 

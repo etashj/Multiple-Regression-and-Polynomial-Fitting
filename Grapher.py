@@ -53,14 +53,52 @@ def plotMultipleRegression(X: NDArray[np.float64], Y: NDArray[np.float64], B: ND
     # Create the meshgrid
     X1, X2 = np.meshgrid(x1_range, x2_range)
 
-    # 3. Calculate Z values using the plane equation
+    # Calculate values
     Z = B[0] + B[1]*X1 + B[2]*X2
 
-    # 5. Plot the surface
+    # Plot the surface
     ax.plot_surface(X1, X2, Z, cmap='viridis', alpha=0.8)
     
     # Show the plot
     plt.show()
 
-def plotPolynomialRegression(): 
-    pass
+
+# Plotter for Polynomial Regression (2-dim only)
+'''
+Parameters
+----------
+X: np.ndarray, shape(n_samples)
+    Dependent variable array. 
+    Eg. [ X_1, X_2, ..., X_n ]
+
+Y: np.ndarray, shape(n_samples)
+    Independent variable array. 
+    Eg. [ Y_1, Y_2, ..., Y_n ]
+    
+B: np.ndarray, shape(m_features)
+    Array of regression coefficient outputs
+    Degree will be inferred from this length
+    Eg. [ β_0, β_1, ..., β_deg ]
+    ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
+
+Result
+------
+Window displayed with data and regression
+'''
+def plotPolynomialRegression(X: NDArray[np.float64], Y: NDArray[np.float64], B: NDArray[np.float64]) -> None: 
+    # Creating the plotting environment
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.scatter(X, Y)
+    
+    # Define the range for x
+    xmin, xmax = ax.get_xlim()
+    Xp = np.linspace(xmin, xmax, 100)
+
+    # Calculate values
+    P = np.poly1d(B[::-1])
+    Yp = P(Xp)
+
+    ax.plot(Xp, Yp)
+
+    plt.show()
