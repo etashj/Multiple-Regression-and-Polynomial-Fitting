@@ -1,6 +1,7 @@
 import MultipleRegression as MR
 import PolynomialRegression as PR
 import numpy as np
+import Grapher
 
 x = np.array( [-3, -2, -1, 0, 1, 2, 3, ] )
 y = np.array( [-14, -1, 4, 5, 2, 1, -2 ] )
@@ -28,4 +29,6 @@ n = np.array([
 
 m = np.array( [4, 6, 9, 12, ] )
 
-MR.regress(n, m)
+R = MR.regress(n, m)
+
+Grapher.plotMultipleRegression(n, m, R)
