@@ -1,5 +1,18 @@
 import numpy as np
 import Grapher
+from numpy.typing import NDArray
+
+def polynomToString(B: NDArray[np.float64]) -> str: 
+    result = str(B[0])
+    for i in range(1, B.shape[0]): 
+        result += f" + {B[i]}(x^{i})"
+    return result
+
+def linearToString(B: NDArray[np.float64]) -> str: 
+    result = str(B[0])
+    for i in range(1, B.shape[0]): 
+        result += f" + {B[i]}(x_{i})"
+    return result
 
 ### Polynomial Regression ###
 import PolynomialRegression as PR
@@ -10,17 +23,17 @@ y = np.array( [-14, -1, 4, 5, 2, 1, -2 ] )
 
 # Try a degree 1 polynomial and graph (underfitting)
 ans = PR.regress_qr(x, y, 1)
-print("1st degree polynomial: ", ans)
+print("1st degree polynomial: ", polynomToString(ans))
 Grapher.plotPolynomialRegression(x,y,ans)
 
 # Try a degree 15 polynomial and graph (gross overfitting)
 ans = PR.regress_qr(x, y, 15)
-print("15th degree polynomial: ", ans)
+print("15th degree polynomial: ", polynomToString(ans))
 Grapher.plotPolynomialRegression(x,y,ans)
 
 # Try a degree 4 polynomial and graph (reasonable fit)
 ans = PR.regress_qr(x, y, 4)
-print("4th degree polynomial: ", ans)
+print("4th degree polynomial: ", polynomToString(ans))
 Grapher.plotPolynomialRegression(x,y,ans)
 
 
@@ -39,7 +52,7 @@ m = np.array( [1,2] )
 
 # Regress
 R = MR.regress(n, m)
-print(R)
+print("Linear regression 1", linearToString(R))
 # Note, you cannot graph higher than 3 dimensions, 
 # to plot this data we would require a 4 dimensional plot
 # You may choose to plot this by plotting each variable independently
@@ -58,5 +71,5 @@ m = np.array( [4, 6, 9, 12, ] )
 
 # Regress and graph
 R = MR.regress(n, m)
-print(R)
+print("Linear regression 2", linearToString(R))
 Grapher.plotMultipleRegression(n, m, R)
