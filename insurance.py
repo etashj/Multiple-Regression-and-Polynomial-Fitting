@@ -26,3 +26,13 @@ Y = df_normalized_minmax["Insurance_Cost"].to_numpy()
 R = regress(X, Y)
 print(linearToString(R))
 plot(X, Y, R)
+
+### Results ###
+'''
+y = 0.33910220484082676 + 0.08830935338117211(x_1) + 0.28065510020236023(x_2)
+
+(NORM_INSURANCE) = 0.33910220484082676 + 0.08830935338117211(NORM_AGE) + 0.28065510020236023(NORM_BMI)
+
+Note to use this equation you mut normalize the age and BMI, then undo the nromalization of insurance. 
+This will present itself as a composition of several functions. 
+'''
