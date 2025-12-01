@@ -34,6 +34,9 @@ def plotMultipleRegression(X: NDArray[np.float64], Y: NDArray[np.float64], B: ND
     # Creating the plotting environment
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
+    ax.set_xlabel("x1")
+    ax.set_ylabel("x2")
+    ax.set_zlabel("y")
     
     # Checking the dimensions
     assert(X.shape[0] == Y.shape[0])
