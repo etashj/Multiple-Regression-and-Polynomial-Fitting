@@ -105,3 +105,43 @@ def plotPolynomialRegression(X: NDArray[np.float64], Y: NDArray[np.float64], B: 
     ax.plot(Xp, Yp)
 
     plt.show()
+
+'''
+Parameters
+----------
+B: np.ndarray, shape(m_features)
+    Array of regression coefficient outputs
+    Degree will be inferred from this length
+    Eg. [ β_0, β_1, ..., β_deg ]
+    ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
+
+Result
+------
+A string representation of the polynomial
+"β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg"
+'''
+def polynomToString(B: NDArray[np.float64]) -> str: 
+    result = str(B[0])
+    for i in range(1, B.shape[0]): 
+        result += f" + {B[i]}(x^{i})"
+    return result
+
+'''
+Parameters
+----------
+B: np.ndarray, shape(m_features)
+    Array of regression coefficient outputs
+    Variables will be inferred from this length
+    Eg. [ β_0, β_1, ..., β_n ]
+    ==> β_0 + β_1*x_1 + β_2*x_2 + ... + β_m*x_n
+
+Result
+------
+A string representation of the polynomial
+"β_0 + β_1*x_1 + β_2*x_2 + ... + β_m*x_n"
+'''
+def linearToString(B: NDArray[np.float64]) -> str: 
+    result = str(B[0])
+    for i in range(1, B.shape[0]): 
+        result += f" + {B[i]}(x_{i})"
+    return result

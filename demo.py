@@ -1,18 +1,7 @@
 import numpy as np
 import Grapher
+from Grapher import polynomToString, linearToString
 from numpy.typing import NDArray
-
-def polynomToString(B: NDArray[np.float64]) -> str: 
-    result = str(B[0])
-    for i in range(1, B.shape[0]): 
-        result += f" + {B[i]}(x^{i})"
-    return result
-
-def linearToString(B: NDArray[np.float64]) -> str: 
-    result = str(B[0])
-    for i in range(1, B.shape[0]): 
-        result += f" + {B[i]}(x_{i})"
-    return result
 
 ### Polynomial Regression ###
 import PolynomialRegression as PR
