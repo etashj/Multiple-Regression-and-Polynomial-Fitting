@@ -33,7 +33,7 @@ def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDAr
         xmat = np.vstack((xmat, X**i))
     xmat = np.asmatrix(np.transpose(xmat))
     
-    # dependent variables vector
+    # Constructing the output matrix
     ymat = np.transpose(np.asmatrix(Y))
 
     # Computing two sides of the normal equations
@@ -60,10 +60,10 @@ def regress_qr(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> N
         xmat = np.vstack((xmat, X**i))
     xmat = np.asmatrix(np.transpose(xmat))
 
-    # in-built QR decomposition
+    # In-built QR decomposition
     Q, R = np.linalg.qr(xmat, mode="reduced")
     
-    # dependent variables vector
+    # Constructing the output matrix
     ymat = np.transpose(np.asmatrix(Y))
 
     # Attempts to solve the system, if there is a singular matrix
