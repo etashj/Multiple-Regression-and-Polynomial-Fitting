@@ -1,3 +1,5 @@
+CMU 21-241 Final Project
+
 Run: 
 ```
 pip install -r requirements.txt

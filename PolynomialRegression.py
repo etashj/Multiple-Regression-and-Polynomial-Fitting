@@ -28,12 +28,14 @@ np.ndarray, shape(m_features)
 def regress(X: NDArray[np.float64], 
             Y: NDArray[np.float64], 
             degree: int)             -> NDArray[np.float64]: 
-
+    # Constructing design matrix by raising independent variables to powers 
+    # 1, ..., degree and adding a column of ones
     xmat = np.ones((1, X.shape[0]))
     for i in range(1, degree+1): 
         xmat = np.vstack((xmat, X**i))
     xmat = np.asmatrix(np.transpose(xmat))
     
+    # Constructing the output matrix
     ymat = np.transpose(np.asmatrix(Y))
 
     # Computing two sides of the normal equations
@@ -56,15 +58,22 @@ def regress(X: NDArray[np.float64],
 def regress_qr(X: NDArray[np.float64], 
                Y: NDArray[np.float64], 
                degree: int)            -> NDArray[np.float64]: 
+    # Constructing design matrix by raising independent variables to powers 
+    # 1, ..., degree and adding a column of ones
     xmat = np.ones((1, X.shape[0]))
     for i in range(1, degree+1): 
         xmat = np.vstack((xmat, X**i))
     xmat = np.asmatrix(np.transpose(xmat))
 
+    # In-built QR decomposition
     Q, R = np.linalg.qr(xmat, mode="reduced")
     
+    # Constructing the output matrix
     ymat = np.transpose(np.asmatrix(Y))
 
+    # Attempts to solve the system, if there is a singular matrix
+    # then we pick a arbitrary solution from the solution space using 
+    # the lstsq function. We note that this function may have been used from the start
     try:
         B = np.linalg.solve(R, np.transpose(Q) * ymat)
     except np.linalg.LinAlgError: 
