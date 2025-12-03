@@ -25,7 +25,10 @@ np.ndarray, shape(m_features)
     ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
 '''
 
-def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDArray[np.float64]: 
+def regress(X: NDArray[np.float64], 
+            Y: NDArray[np.float64], 
+            degree: int)             -> NDArray[np.float64]: 
+
     xmat = np.ones((1, X.shape[0]))
     for i in range(1, degree+1): 
         xmat = np.vstack((xmat, X**i))
@@ -39,7 +42,8 @@ def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDAr
 
     # Attempts to solve the system, if there is a singular matrix
     # then we pick a arbitrary solution from the solution space using 
-    # the lstsq function. We note that this function may have been used from the start
+    # the lstsq function. We note that this function may have 
+    # been used from the start
     try:
         B = np.linalg.solve(ata, atb)
     except np.linalg.LinAlgError: 
@@ -49,7 +53,9 @@ def regress(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDAr
     B = [ b[0] for b in np.asarray(B) ]
     return np.asarray(B)
     
-def regress_qr(X: NDArray[np.float64], Y: NDArray[np.float64], degree: int) -> NDArray[np.float64]: 
+def regress_qr(X: NDArray[np.float64], 
+               Y: NDArray[np.float64], 
+               degree: int)            -> NDArray[np.float64]: 
     xmat = np.ones((1, X.shape[0]))
     for i in range(1, degree+1): 
         xmat = np.vstack((xmat, X**i))

@@ -30,7 +30,9 @@ Result
 ------
 Window displayed with data and regression
 '''
-def plotMultipleRegression(X: NDArray[np.float64], Y: NDArray[np.float64], B: NDArray[np.float64]) -> None: 
+def plotMultipleRegression(X: NDArray[np.float64], 
+                           Y: NDArray[np.float64], 
+                           B: NDArray[np.float64]) -> None: 
     # Creating the plotting environment
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -88,7 +90,9 @@ Result
 ------
 Window displayed with data and regression
 '''
-def plotPolynomialRegression(X: NDArray[np.float64], Y: NDArray[np.float64], B: NDArray[np.float64]) -> None: 
+def plotPolynomialRegression(X: NDArray[np.float64], 
+                             Y: NDArray[np.float64], 
+                             B: NDArray[np.float64]) -> None: 
     # Creating the plotting environment
     fig = plt.figure()
     ax = fig.add_subplot()
