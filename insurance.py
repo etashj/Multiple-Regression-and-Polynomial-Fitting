@@ -13,9 +13,9 @@ insurance_df = pd.read_csv("insurance_dataset.csv")
 # )
 
 # Keep only smokers
-insurance_df = insurance_df.drop(
-    insurance_df[insurance_df.Smoker == "no"].index
-)
+# insurance_df = insurance_df.drop(
+#     insurance_df[insurance_df.Smoker == "no"].index
+# )
 
 # Drop categroical variables
 df = insurance_df.drop(['Smoker', 
