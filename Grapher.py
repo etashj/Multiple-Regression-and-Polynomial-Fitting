@@ -149,3 +149,61 @@ def linearToString(B: NDArray[np.float64]) -> str:
     for i in range(1, B.shape[0]): 
         result += f" + {B[i]}(x_{i})"
     return result
+
+# Plotter for 2 polynomial regressions on the same plot - 
+# specifically for showing the difference between a good fit 
+# regression and an overfit regression
+'''
+Parameters
+----------
+X: np.ndarray, shape(n_samples)
+    Dependent variable array. 
+    Eg. [ X_1, X_2, ..., X_n ]
+
+Y: np.ndarray, shape(n_samples)
+    Independent variable array. 
+    Eg. [ Y_1, Y_2, ..., Y_n ]
+    
+B_good: np.ndarray, shape(m_features)
+    Array of good fit regression coefficient outputs
+    Degree will be inferred from this length
+    Eg. [ β_0, β_1, ..., β_deg ]
+    ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
+
+B_over: np.ndarray, shape(m_features)
+    Array of overfit regression coefficient outputs
+    Degree will be inferred from this length
+    Eg. [ β_0, β_1, ..., β_deg ]
+    ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
+
+Result
+------
+Window displayed with data and regressions
+'''
+def plotGoodVsOverFit(X: NDArray[np.float64], 
+                      Y: NDArray[np.float64], 
+                      B_good: NDArray[np.float64],
+                      B_over: NDArray[np.float64]) -> None: 
+    # Creating the plotting environment
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.scatter(X, Y)
+    
+    # Define the range for x
+    xmin, xmax = ax.get_xlim()
+    Xp = np.linspace(xmin, xmax, 100)
+
+    # Calculate y-values of good fit polynomial
+    P_good = np.poly1d(B_good[::-1])
+    Yp_good = P_good(Xp)
+
+    # Calculate y-values of overfit polynomial
+    P_over = np.poly1d(B_over[::-1])
+    Yp_over = P_over(Xp)
+
+    ax.plot(Xp, Yp_good, label="Good Fit")
+    ax.plot(Xp, Yp_over, 'r', label="Overfit")
+
+    ax.legend()
+
+    plt.show()
