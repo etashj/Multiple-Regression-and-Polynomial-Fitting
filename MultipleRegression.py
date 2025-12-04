@@ -28,7 +28,7 @@ np.ndarray, shape(m_features)
 '''
 
 def regress(X: NDArray[np.float64], 
-            Y: NDArray[np.float64])  -> NDArray[np.float64]: 
+            Y: NDArray[np.float64]) -> NDArray[np.float64]: 
     
     # Constructing the design matrix by appending a column of 1s
     xmat = np.vstack( (np.ones((1, X.shape[0])), np.transpose(X)) )
@@ -42,9 +42,9 @@ def regress(X: NDArray[np.float64],
     atb = np.transpose(xmat) * ymat
 
     # Attempts to solve the system, if there is a singular matrix
-    # then we pick a arbitrary solution from the solution space using 
-    # the lstsq function. We note that this function may have 
-    # been used from the start
+    # then we pick a arbitrary solution from the solution space 
+    # using the lstsq function. We note that this function may 
+    # have been used from the start
     try:
         B = np.linalg.solve(ata, atb)
     except np.linalg.LinAlgError: 

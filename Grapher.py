@@ -21,7 +21,8 @@ Y: np.ndarray, shape(n_samples)
     Eg. [ Y_1, Y_2, ..., Y_n ]
     
 B: np.ndarray, shape(3_features)
-    Array of regression coefficient outputs (outputs of MultipleRegression.regress(X,Y))
+    Array of regression coefficient outputs 
+    (outputs of MultipleRegression.regress(X,Y))
     Eg. [ β_0, β_1, β_2, ]
     ==> β_0 + β_1*x_1 + β_2*x_2
     ==> [β]X.T (in matrix form)

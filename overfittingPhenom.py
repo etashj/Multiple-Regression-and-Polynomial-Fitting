@@ -29,8 +29,9 @@ test_df = pd.read_csv("icecream_test.csv")
 # Extracting independent variable vector from dataset
 X_test = test_df["Temperature (C)"].to_numpy()
 
-# Calculating 2 sets of predicted dependent variable values for the 
-# input vector X_test using the good fit and overfit polynomial
+# Calculating 2 sets of predicted dependent variable values 
+# for the input vector X_test using the good fit and 
+# overfit polynomial
 Y_test_goodpred = np.polyval(np.flip(R_fit), X_test)
 Y_test_badpred = np.polyval(np.flip(R_overfit), X_test)
 
@@ -40,8 +41,11 @@ Y_test_actual = test_df["Ice Cream Sales (units)"].to_numpy()
 # Plotting regressions side-by-side with test data
 plot2(X_test, Y_test_actual, R_fit, R_overfit)
 
-# Calculating mean squared error for both the good and bad prediction
-mse_fit = np.mean((Y_test_goodpred - Y_test_actual)**2) # value turns out to be 12.44
+# Calculating mean squared error for both the good 
+# and bad prediction
+mse_fit = np.mean((Y_test_goodpred - Y_test_actual)**2)
+# mse_fit turns out to be 12.44
 print("error for good fit: ", mse_fit)
-mse_overfit = np.mean((Y_test_badpred - Y_test_actual)**2) # value turns out to be 22.50
+mse_overfit = np.mean((Y_test_badpred - Y_test_actual)**2)
+# mse_overfit turns out to be 22.50
 print("error for overfit: ", mse_overfit)
