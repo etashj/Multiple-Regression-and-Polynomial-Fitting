@@ -165,45 +165,52 @@ Y: np.ndarray, shape(n_samples)
     Eg. [ Y_1, Y_2, ..., Y_n ]
     
 B_good: np.ndarray, shape(m_features)
-    Array of good fit regression coefficient outputs
+    Array of degree 2 regression coefficient outputs
     Degree will be inferred from this length
-    Eg. [ β_0, β_1, ..., β_deg ]
-    ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
+    Eg. [ β_0, β_1, β_2 ]
+    ==> β_0 + β_1*x + β_2*x^2
 
 B_over: np.ndarray, shape(m_features)
     Array of overfit regression coefficient outputs
     Degree will be inferred from this length
-    Eg. [ β_0, β_1, ..., β_deg ]
-    ==> β_0 + β_1*x + β_2*x^2 + ... + β_m*x^deg
+    Eg. [ β_0, β_1, ..., β_6 ]
+    ==> β_0 + β_1*x + β_2*x^2 + ... + β_6*x^6
 
 Result
 ------
-Window displayed with data and regressions
+Window displayed with data and side-by-side regressions
 '''
 def plotGoodVsOverFit(X: NDArray[np.float64], 
                       Y: NDArray[np.float64], 
                       B_good: NDArray[np.float64],
                       B_over: NDArray[np.float64]) -> None: 
     # Creating the plotting environment
-    fig = plt.figure()
-    ax = fig.add_subplot()
-    ax.scatter(X, Y)
+    _, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+    ax1.scatter(X, Y)
+    ax2.scatter(X, Y)
     
     # Define the range for x
-    xmin, xmax = ax.get_xlim()
+    xmin, xmax = ax1.get_xlim()
     Xp = np.linspace(xmin, xmax, 100)
 
-    # Calculate y-values of good fit polynomial
+    # Calculate y-values of degree 2 polynomial
     P_good = np.poly1d(B_good[::-1])
     Yp_good = P_good(Xp)
 
-    # Calculate y-values of overfit polynomial
+    # Calculate y-values of degree 6 polynomial
     P_over = np.poly1d(B_over[::-1])
     Yp_over = P_over(Xp)
 
-    ax.plot(Xp, Yp_good, label="Good Fit")
-    ax.plot(Xp, Yp_over, 'r', label="Overfit")
+    # Adding a regression to each subplot with labels
+    ax1.plot(Xp, Yp_good)
+    ax1.set_title("Degree 2 Regression")
+    ax1.set_xlabel("x")
+    ax1.set_ylabel("y")
+    ax2.plot(Xp, Yp_over)
+    ax2.set_title("Degree 6 Regression")
+    ax2.set_xlabel("x")
+    ax2.set_ylabel("y")
 
-    ax.legend()
-
+    # Showing the graphs
+    plt.tight_layout()
     plt.show()
