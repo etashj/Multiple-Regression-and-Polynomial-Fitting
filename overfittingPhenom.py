@@ -15,12 +15,13 @@ Y_train = training_df["Ice Cream Sales (units)"].to_numpy()
 # Degree 2 regression (is not overfitting)
 R_fit = regress(X_train, Y_train, 2)
 print(polynomToString(R_fit))
-plot1(X_train, Y_train, R_fit)
 
 # Degree 6 regression (is overfitting)
 R_overfit = regress(X_train, Y_train, 6)
 print(polynomToString(R_overfit))
-plot1(X_train, Y_train, R_overfit)
+
+# Plotting regressions side-by-side with training data
+plot2(X_train, Y_train, R_fit, R_overfit)
 
 # Reading the test data
 test_df = pd.read_csv("icecream_test.csv")
@@ -36,7 +37,7 @@ Y_test_badpred = np.polyval(np.flip(R_overfit), X_test)
 # Extracting the actual dependent variable vector from the dataset
 Y_test_actual = test_df["Ice Cream Sales (units)"].to_numpy()
 
-# Graphing both fits on a plot with the test data
+# Plotting regressions side-by-side with test data
 plot2(X_test, Y_test_actual, R_fit, R_overfit)
 
 # Calculating mean squared error for both the good and bad prediction
